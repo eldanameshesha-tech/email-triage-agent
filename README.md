@@ -29,6 +29,13 @@ From 12 test runs covering meeting requests, questions needing replies, promotio
 | Average duration | about 1.3 s |
 
 This is a small manual test set, not a load test. Groq's free tier has not been tested at higher volume.
+## Tool-selection eval
+
+`eval.py` runs 9 hand-written emails through the agent and checks whether it picks the expected tool.
+
+Result: **8/9 correct.** The one miss was a short "Thanks!" email that I labelled `summarize_only`; the agent chose `draft_reply` instead. That is a defensible choice, so the expected label for that kind of email is ambiguous.
+
+This is a small test set written by hand, so treat it as a smoke test, not a benchmark.
 
 ## Run it locally
 
