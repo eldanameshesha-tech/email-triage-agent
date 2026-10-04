@@ -66,9 +66,9 @@ Example request:
 
 ## Known limitations
 
-- The three tools (`create_calendar_event`, `draft_reply`, `summarize_only`) are stubs. They return a confirmation string but do not create real calendar events or send real drafts. Connecting them to the Google Calendar and Gmail APIs is the next step.
+- `draft_reply` creates real Gmail drafts through the Gmail API (it never sends email). `create_calendar_event` and `summarize_only` are still stubs; connecting calendar events to the Google Calendar API is the next step. Draft wording is not tuned yet (it can leave placeholders such as the sender name).
 - No authentication on the endpoints.
-- Runs locally only; not deployed.
+- Runs locally only; not deployed. Optional: to create real Gmail drafts, enable the Gmail API in Google Cloud, download an OAuth desktop client as `credentials.json` into the project folder, and set `USE_REAL_GMAIL=1` in `.env`. The first run opens a browser to sign in.
 
 ## Related work
 
