@@ -1,3 +1,5 @@
+import os
+os.environ["USE_REAL_GMAIL"] = "0"
 from main import agent
 
 test_cases = [

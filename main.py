@@ -6,10 +6,11 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from langchain.agents import create_agent
 from langchain_core.tools import tool
-
+from gmail_tools import create_gmail_draft
 load_dotenv()
 
 DB_URL = os.getenv("DB_URL")
+USE_REAL_GMAIL = os.getenv("USE_REAL_GMAIL") == "1"
 @tool
 def create_calendar_event(title: str, date: str, time: str) -> str:
     """Create a calendar event for a meeting. Use when the email is requesting a meeting."""
@@ -18,6 +19,9 @@ def create_calendar_event(title: str, date: str, time: str) -> str:
 @tool
 def draft_reply(to: str, subject: str, body: str) -> str:
     """Draft an email reply. Use when the email needs a response."""
+    if USE_REAL_GMAIL:
+        draft_id = create_gmail_draft(to, subject, body)
+        return f"Gmail draft created (id {draft_id}) to {to} - Subject: {subject}"
     return f"Draft created to {to} - Subject: {subject}"
 
 @tool
